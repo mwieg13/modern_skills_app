@@ -10,4 +10,4 @@ This project had some very interesting ideas related to capturing data over time
 
 ![System Design Diagram](images/system_design.png)
 
-This project was originally designed to give me more experience with specific technologies. In that way, function followed form. That being said, I do believe the design I came up with would scale well if this project was developed in a formal capacity.
+This project was originally designed to give me more experience with specific technologies. I decided what I wanted to use, and then came up with a project that could make use of those technologies. That being said, I do believe my design would scale well if this project was developed in a formal capacity.
