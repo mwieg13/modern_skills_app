@@ -1,0 +1,60 @@
+import mysql.connector
+import os
+
+# for generating unique hashUrls for inserts...
+from datetime import datetime, timezone
+import math
+
+print('Connecting to MySQL with these params:')
+print(f"MYSQL_URL: {os.environ.get('MYSQL_URL')}")
+print(f"MYSQL_USER: {os.environ.get('MYSQL_USER')}")
+print(f"MYSQL_PASS: {os.environ.get('MYSQL_PASS')}")
+print(f"MYSQL_DB_NAME: {os.environ.get('MYSQL_DB_NAME')}")
+
+# Connect to MySQL server running locally
+conn = mysql.connector.connect(
+    host=     os.environ.get("MYSQL_URL"),
+    user=     os.environ.get("MYSQL_USER"),
+    password= os.environ.get("MYSQL_PASS"),
+    database= os.environ.get("MYSQL_DB_NAME"),
+)
+
+insertQuery = """
+INSERt into modernskills.url_data
+VALUES ("%", "fake url", '2000-01-02 12:01:02', 'Denver', 'CO', 'Full-Time')
+"""
+
+selectQuery = "SELECT * FROM modernskills.url_data;"
+
+
+def runQuery(connObj, query, is_update=False):
+    try:
+        cursor = connObj.cursor()
+        cursor.execute(query)
+
+        # Only needed for INSERT/UPDATE/DELETE
+        if is_update:
+            connObj.commit()
+
+        # Fetch all results
+        results = cursor.fetchall()
+
+        print("Results from query: \n")
+
+        # Print each row
+        for row in results:
+            print(row)
+
+    except mysql.connector.Error as err:
+        print(f"Error running query: {err}")
+    finally:
+        cursor.fetchall()
+        cursor.close()
+
+
+
+runQuery(conn, insertQuery.replace("%", str(math.ceil(datetime.now(timezone.utc).timestamp()))), is_update=True)
+
+runQuery(conn, selectQuery)
+
+
