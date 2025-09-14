@@ -8,6 +8,6 @@ This project had some very interesting ideas related to capturing data over time
 
 ## System Design
 
-![System Design Diagram](system_design.png)
+![System Design Diagram](images/system_design.png)
 
 This project was originally designed to give me more experience with specific technologies. In that way, function followed form. That being said, I do believe the design I came up with would scale well if this project was developed in a formal capacity.
